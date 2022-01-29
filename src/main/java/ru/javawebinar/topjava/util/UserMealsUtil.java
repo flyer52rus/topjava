@@ -24,15 +24,13 @@ public class UserMealsUtil {
         );
 
 
-//        List<UserMealWithExcess> mealsTo = filteredByCycles(meals, LocalTime.of(7, 0), LocalTime.of(12, 0), 2000);
-//        mealsTo.forEach(System.out::println);
+        List<UserMealWithExcess> mealsTo = filteredByCycles(meals, LocalTime.of(7, 0), LocalTime.of(12, 0), 2000);
+        mealsTo.forEach(System.out::println);
 
-        System.out.println(filteredByStreams(meals, LocalTime.of(7, 0), LocalTime.of(12, 0), 2000));
+ //       System.out.println(filteredByStreams(meals, LocalTime.of(7, 0), LocalTime.of(12, 0), 2000));
     }
 
     public static List<UserMealWithExcess> filteredByCycles(List<UserMeal> meals, LocalTime startTime, LocalTime endTime, int caloriesPerDay) {
-
-        List<UserMealWithExcess> userMealWithExcesses = new ArrayList<>();
 
         Collections.sort(meals, (o1, o2) -> {
             if (o1.getDateTime().isAfter(o2.getDateTime())) {
@@ -44,7 +42,7 @@ public class UserMealsUtil {
             }
         });
 
-        HashMap<LocalDate, Integer> mapDateAndCalories = new HashMap<>();
+        Map<LocalDate, Integer> mapDateAndCalories = new HashMap<>();
 
         LocalDate localDate = meals.get(0).getDateTime().toLocalDate();
         int calories = 0;
@@ -59,6 +57,8 @@ public class UserMealsUtil {
             }
         }
         mapDateAndCalories.put(localDate, calories);
+
+        List<UserMealWithExcess> userMealWithExcesses = new ArrayList<>();
 
         for (UserMeal um: meals) {
             LocalTime localTimeMeals = um.getDateTime().toLocalTime();
@@ -87,14 +87,13 @@ public class UserMealsUtil {
                         Collectors.summingInt(UserMeal::getCalories)
                 ));
 
-        List<UserMealWithExcess> listUserMealWithExcess = new ArrayList<>();
-        meals.stream()
+        return meals.stream()
                 .filter(meal -> meal.getDateTime().toLocalTime().isAfter(startTime) && meal.getDateTime().toLocalTime().isBefore(endTime))
-                .forEach(meal -> listUserMealWithExcess.add(new UserMealWithExcess(meal.getDateTime()
-                        , meal.getDescription()
-                        , meal.getCalories()
-                        , mapCaloriesInDay.get(meal.getDateTime().toLocalDate()) > caloriesPerDay)));
-
-        return listUserMealWithExcess;
+                .collect(
+                        ArrayList::new, // создаем ArrayList
+                        (listUserMealWithExcess, item) -> listUserMealWithExcess.add(new UserMealWithExcess(item.getDateTime(),
+                                item.getDescription(),
+                                item.getCalories(), mapCaloriesInDay.get(item.getDateTime().toLocalDate()) > caloriesPerDay)), // добавляем в список элемент
+                        ArrayList::addAll); // добавляем в список другой список
     }
 }
