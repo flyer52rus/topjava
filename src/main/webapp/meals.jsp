@@ -1,5 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix = "fn" uri = "http://java.sun.com/jsp/jstl/functions" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
+
 <html lang="ru">
 <head>
     <title>Meals</title>
@@ -11,13 +13,13 @@
 <br>
 <table border="3">
     <tr>
-        <th >Date</th>
-        <th >Description</td>
-        <th >Calories</td>
+        <th>Date</th>
+        <th>Description</td>
+        <th>Calories</td>
     </tr>
     <c:forEach items="${mealsTo}" var="mealsTo">
         <tr style="color: ${mealsTo.excess ? 'red' : 'green'}">
-            <td> ${mealsTo.dateTime} </td>
+            <td> ${fn:replace(mealsTo.dateTime, 'T', ' ')} </td>
             <td> ${mealsTo.description} </td>
             <td> ${mealsTo.calories} </td>
         </tr>
@@ -25,4 +27,3 @@
 </table>
 </body>
 </html>
-
