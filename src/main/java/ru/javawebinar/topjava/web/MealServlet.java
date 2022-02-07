@@ -28,7 +28,6 @@ public class MealServlet extends HttpServlet {
         meals = new DataSource().getMeals();
         List<MealTo> mealsTo = MealsUtil.filteredByStreams(meals, LocalTime.of(0, 0), LocalTime.of(23, 59, 59, 999999999), caloriesPerDay);
         response.setContentType("text/html;charset=utf-8");
-        System.out.println(mealsTo);
         request.setAttribute("mealsTo", mealsTo);
         getServletContext().getRequestDispatcher("/meals.jsp").forward(request, response);
     }
