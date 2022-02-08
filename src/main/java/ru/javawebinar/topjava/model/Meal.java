@@ -19,7 +19,7 @@ public class Meal {
         this.dateTime = dateTime;
         this.description = description;
         this.calories = calories;
-        this.id =countId.getCountId();
+        this.id = countId.getCountId();
     }
 
     public LocalDateTime getDateTime() {
