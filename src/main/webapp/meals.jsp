@@ -11,17 +11,21 @@
 <hr>
 <h2>Meals</h2>
 <br>
+<a href="/edit?id=-1" > Add Meal </a>
+<br>
 <table border="3">
     <tr>
         <th>Date</th>
-        <th>Description</td>
-        <th>Calories</td>
+        <th>Description</th>
+        <th>Calories</th>
     </tr>
-    <c:forEach items="${mealsTo}" var="mealsTo">
-        <tr style="color: ${mealsTo.excess ? 'red' : 'green'}">
-            <td> ${fn:replace(mealsTo.dateTime, 'T', ' ')} </td>
-            <td> ${mealsTo.description} </td>
-            <td> ${mealsTo.calories} </td>
+    <c:forEach items="${mealsTo}" var="mealTo">
+        <tr style="color: ${mealTo.excess ? 'red' : 'green'}">
+            <td> ${fn:replace(mealTo.dateTime, 'T', ' ')} </td>
+            <td> ${mealTo.description} </td>
+            <td> ${mealTo.calories} </td>
+            <td> <a href="/edit?id=${mealTo.id}" > Edit </a> </td>
+            <td> <a href="/delete?id=${mealTo.id}"> Delete </a> </td>
         </tr>
     </c:forEach>
 </table>
