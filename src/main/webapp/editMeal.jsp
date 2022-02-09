@@ -13,7 +13,7 @@
 <br>
 <br>
 <jsp:useBean id="meal" scope="request" type="ru.javawebinar.topjava.model.Meal"/>
-<form method="post" action="/meals">
+<form method="post" action="meals">
     <dl>
         <dt>Date and Time: </dt>
         <dd><input type="datetime-local" name="dateTime" value="${meal.dateTime}" placeholder="${meal.id}"></dd>
