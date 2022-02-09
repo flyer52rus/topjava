@@ -11,7 +11,7 @@
 <hr>
 <h2>Meals</h2>
 <br>
-<a href="edit?id=-1" > Add Meal </a>
+<a href="edit?id=0" > Add Meal </a>
 <br>
 <table border="3">
     <tr>

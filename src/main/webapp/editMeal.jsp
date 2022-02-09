@@ -9,27 +9,29 @@
 </head>
 <body>
 <br>
-<h2> Edit Meal </h2>
+<h2> ${isAdd ? "Add Meal" : "Edit Meal" } </h2>
 <br>
+<hr>
 <br>
-<jsp:useBean id="meal" scope="request" type="ru.javawebinar.topjava.model.Meal"/>
-<form method="post" action="meals">
+<form method="post" action="edit">
     <dl>
         <dt>Date and Time: </dt>
-        <dd><input type="datetime-local" name="dateTime" value="${meal.dateTime}" placeholder="${meal.id}"></dd>
+        <dd><input type="datetime-local" name="dateTime" value="${meal.dateTime == null ? "" : meal.dateTime}" placeholder="${meal.dateTime}"></dd>
         <dt> Обязательный формат даты: yyyy-mm-ddTHH:mm </dt>
     </dl>
     <dl>
         <dt>Description</dt>
-        <dd><input type="text" name="description" value="${meal.description}" placeholder="${meal.description}"></dd>
+        <dd><input type="text" name="description" value="${meal.description == null ? "" : meal.description}" placeholder="${meal.description}"></dd>
     </dl>
     <dl>
         <dt>Calories</dt>
-        <dd><input type="number" name="calories" value="${meal.calories}" placeholder="${meal.calories}"></dd>
+        <dd><input type="number" name="calories" value="${meal.calories == null ? "" : meal.calories}" placeholder="${meal.calories}"></dd>
     </dl>
-    <a><input type="hidden" name="id" value="${meal.id}"></a>
-    <button type="submit">Save</button>
+    <a><input type="hidden" name="isAdd" value="${isAdd}"></a>
+    <a><input type="hidden" name="id" value="${id}"></a>
+    <button type="submit">Save</button> <button name="cancel" value="true" onclick="edit">Cancel</button>
 </form>
+
 </body>
 </html>
 
