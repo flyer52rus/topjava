@@ -5,15 +5,15 @@
 
 <html lang="ru">
 <head>
-    <title>EditMeal</title>
+    <title>${id != null ? "EditMeal" : "AddMeal" }</title>
 </head>
 <body>
 <br>
-<h2> ${isAdd ? "Add Meal" : "Edit Meal" } </h2>
+<h2> ${id != null ? "Edit Meal" : "Add Meal" } </h2>
 <br>
 <hr>
 <br>
-<form method="post" action="edit">
+<form method="post" action="meals">
     <dl>
         <dt>Date and Time: </dt>
         <dd><input type="datetime-local" name="dateTime" value="${meal.dateTime == null ? "" : meal.dateTime}" placeholder="${meal.dateTime}"></dd>
@@ -27,11 +27,9 @@
         <dt>Calories</dt>
         <dd><input type="number" name="calories" value="${meal.calories == null ? "" : meal.calories}" placeholder="${meal.calories}"></dd>
     </dl>
-    <a><input type="hidden" name="isAdd" value="${isAdd}"></a>
-    <a><input type="hidden" name="id" value="${id}"></a>
-    <button type="submit">Save</button> <button name="cancel" value="true" onclick="edit">Cancel</button>
+    <a><input type="hidden" name="id" value="${id != null ? id : null}"></a>
+    <button type="submit" name="save" value="true">Save</button> <button name="cancel" value="true" >Cancel</button>
 </form>
-
 </body>
 </html>
 

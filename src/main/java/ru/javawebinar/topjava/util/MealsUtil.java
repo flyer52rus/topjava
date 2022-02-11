@@ -1,7 +1,5 @@
 package ru.javawebinar.topjava.util;
 
-import ru.javawebinar.topjava.dao.MealDao;
-import ru.javawebinar.topjava.dao.MealDaoImpl;
 import ru.javawebinar.topjava.model.Meal;
 import ru.javawebinar.topjava.model.MealTo;
 
@@ -12,14 +10,8 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class MealsUtil {
-    private static MealDao mealDAO = MealDaoImpl.getInstance();
-    private static List<Meal> meals = mealDAO.getAll();
-    private static final int CALORIESPERDAY = 2000;
 
-    public static void main(String[] args) {
-        List<MealTo> mealsTo = filteredByStreams(meals, LocalTime.of(7, 0), LocalTime.of(12, 0), 2000);
-        mealsTo.forEach(System.out::println);
-    }
+    private static final int CALORIESPERDAY = 2000;
 
     public static List<MealTo> filteredByStreams(List<Meal> meals, LocalTime startTime, LocalTime endTime, int caloriesPerDay) {
         Map<LocalDate, Integer> caloriesSumByDate = meals.stream()
@@ -37,7 +29,7 @@ public class MealsUtil {
         return new MealTo(meal.getId(),meal.getDateTime(), meal.getDescription(), meal.getCalories(), excess);
     }
 
-    public static List<MealTo> getMealsTo() {
+    public static List<MealTo> getMealsTo(List<Meal> meals) {
         return MealsUtil.filteredByStreams(meals, LocalTime.MIN, LocalTime.MAX, CALORIESPERDAY);
     }
 }

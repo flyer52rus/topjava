@@ -11,7 +11,9 @@
 <hr>
 <h2>Meals</h2>
 <br>
-<a href="edit?id=0" > Add Meal </a>
+<form action="" method="post" >
+    <button name="add" value="true" >Add</button>
+</form>
 <br>
 <table border="3">
     <tr>
@@ -24,8 +26,17 @@
             <td> ${fn:replace(mealTo.dateTime, 'T', ' ')} </td>
             <td> ${mealTo.description} </td>
             <td> ${mealTo.calories} </td>
-            <td> <a href="edit?id=${mealTo.id}" > Edit </a> </td>
-            <td> <a href="delete?id=${mealTo.id}"> Delete </a> </td>
+            <td>
+                <form action="" method="post" >
+                    <button name="edit" value="${mealTo.id}" >Edit</button>
+                </form>
+            </td>
+            <td>
+                <form action="" method="post" >
+                    <button name="delete" value="${mealTo.id}" >Delete</button>
+                </form>
+            </td>
+
         </tr>
     </c:forEach>
 </table>
